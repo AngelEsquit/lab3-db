@@ -1,1 +1,4 @@
-# lab3-db
+# Laboratorio 3
+## Integrantes
+- Angel Esquit
+- Javier Benitez
