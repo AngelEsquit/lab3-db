@@ -1,5 +1,5 @@
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from .models import GeneroEnum
 from .crud import crear_autor, crear_libro, asignar_autor_a_libro, obtener_autores, obtener_libros, actualizar_libro, eliminar_libro, actualizar_autor, eliminar_autor
 import os
@@ -19,6 +19,8 @@ def menu():
     print("7. Eliminar libro")
     print("8. Actualizar autor")
     print("9. Eliminar autor")
+    print("10. Índice")
+    print("11. Crear schema.sql")
     print("0. Salir")
 
 def main():
@@ -126,6 +128,19 @@ def main():
             except Exception as e:
                 print("Error:", e)
                 session.rollback()
+
+        elif opcion == "10":
+            print("\n--- ÍNDICE (vista_libros_autores) ---")
+            result = session.execute(text("SELECT * FROM vista_libros_autores"))
+            for row in result:
+                print(
+                    f"Libro: [{row.libro_id}] {row.titulo} ({row.genero}, {row.anio_publicacion}) - ISBN: {row.isbn}\n"
+                    f"   Autor: [{row.autor_id}] {row.autor_nombre} - {row.correo}\n"
+                )
+        
+        elif opcion == "11":
+            from .genera_schema import generar_schema
+            generar_schema()
 
         elif opcion == "0":
             print("¡Hasta luego!")

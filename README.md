@@ -15,7 +15,7 @@ docker compose down --volumes --remove-orphans
 ``` bash
 docker compose exec db psql -U postgres -d lab3
 ```
-### Ejecutar main.py dentro del contenedor
+### Ejecutar el programa dentro del contenedor
 ``` bash
-docker compose exec app python -m app.main
+docker compose exec app python -m app.cli
 ```

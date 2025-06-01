@@ -3,7 +3,7 @@ CHECK (VALUE ~ '^[0-9]{13}$');
 
 CREATE TYPE genero_enum AS ENUM ('Ficción', 'No Ficción', 'Ciencia', 'Historia');
 
-CREATE TABLE libro (
+CREATE TABLE libros (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(150) NOT NULL UNIQUE,
     isbn isbn13 NOT NULL UNIQUE,
@@ -11,7 +11,7 @@ CREATE TABLE libro (
     anio_publicacion INT CHECK (anio_publicacion > 1500)
 );
 
-CREATE TABLE autor (
+CREATE TABLE autores (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     correo email NOT NULL UNIQUE

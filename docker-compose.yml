@@ -17,11 +17,13 @@ services:
       - db
     environment:
       DB_URL: postgresql://postgres:postgres@db:5432/lab3
+      PGPASSWORD: postgres
     volumes:
       - ./app:/app
+      - ./data.sql:/data.sql
     stdin_open: true
     tty: true
-    command: sh -c "sleep 5 && python -m app.database && uvicorn app.main:app --host 0.0.0.0 --port 5001"
+    command: sh -c "sleep 5 && python -m app.database && psql -h db -U postgres -d lab3 -f /data.sql && uvicorn app.main:app --host 0.0.0.0 --port 5001"
 
 volumes:
   pgdata:
